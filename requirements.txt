@@ -1,0 +1,11 @@
+# Project: stress-sleep-performance
+
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+statsmodels
+
+# Development dependencies
+pytest

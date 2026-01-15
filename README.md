@@ -1,0 +1,190 @@
+# 📘 Student Performance & Cognitive Factors — README
+
+## 📌 Project Description  
+This project analyzes the **Student Performance & Behavior Dataset** to investigate how **stress levels** and **sleep duration** interact and influence students’ academic outcomes.  
+The core hypothesis:  
+> *Stress_Level negatively impacts Total_Score, but sufficient Sleep_Hours_per_Night may buffer this effect.*
+
+### 🎯 Main Objectives  
+- Understand the structure and biases of the dataset.  
+- Clean and preprocess academic, demographic, and behavioral features.  
+- Explore correlations between stress, sleep, and academic performance.  
+- Build a regression model to test whether sleep moderates the effect of stress.  
+- Identify potential thresholds where stress begins to significantly reduce performance.
+
+### 🧩 Assumptions  
+- Stress_Level and Sleep_Hours_per_Night are self‑reported but reliable enough for modeling.  
+- Total_Score is a weighted metric and not a simple average.  
+- Missing values are random and can be imputed without introducing systematic bias.
+
+### 🧪 Hypothesis  
+1. Higher stress correlates with lower academic performance.  
+2. Sleep moderates the relationship: students with 7–8 hours of sleep show greater resilience to stress.  
+3. There may be a stress “tipping point” where performance drops sharply.
+
+---
+
+## 📂 Project Structure
+
+```
+project_root/
+│
+├── data/
+│   └── Students_Grading_Dataset_Biased.csv
+│
+├── src/
+│   ├── data_loading.py
+│   ├── data_cleaning.py
+│   ├── feature_engineering.py
+│   ├── modeling.py
+│   ├── analysis.py
+│   ├── visualization_basic.py
+    └── visualization_advanced.py
+│
+├── tests/
+│   ├── test_data_loading.py
+│   ├── test_data_cleaning.py
+│   ├── test_feature_engineering.py
+│   ├── test_modeling.py
+│   └── test_analysis.py
+│
+├── main.py
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 🧵 Key Stages & What Was Done
+
+### **1. Data Import**
+- Load the CSV dataset.  
+- Validate column types and detect missing values.  
+- Log dataset shape and anomalies.
+
+### **2. Data Processing**
+- Impute missing values (Attendance, Assignments_Avg, Parent_Education_Level).  
+- Encode categorical variables (Gender, Department, Parent_Education_Level, etc.).  
+- Normalize or scale numeric features where needed.
+
+### **3. Feature Engineering**
+- Create interaction term:  
+  \[
+  \text{Stress} \times \text{Sleep}
+  \]
+- Validate distributions and detect outliers.  
+- Construct modeling-ready dataset.
+
+### **4. Modeling**
+- Pearson correlation analysis between stress, sleep, and Total_Score.  
+- Multiple linear regression with interaction term.  
+- Evaluate significance (p-values), effect sizes, and model fit.
+
+### **5. Analysis**
+- Identify stress thresholds where performance declines.  
+- Compare performance across sleep ranges (e.g., <6, 6–7, 7–8, >8 hours).  
+- Interpret moderation effect.
+
+### **6. Visualization**
+- Correlation heatmaps.  
+- Regression plots with interaction effects.  
+- Stress vs. Total_Score curves with sleep-level overlays.
+
+---
+
+## 📊 Data Description & Dataset Link
+
+**Dataset:** *Students_Grading_Dataset_Biased.csv*  
+**Rows:** 5,000  
+**Columns:** 23  
+
+### Key Variables  
+| Column | Description |
+|--------|-------------|
+| Stress_Level | Self-reported stress (1–10) |
+| Sleep_Hours_per_Night | Avg. nightly sleep hours |
+| Total_Score | Weighted academic performance |
+| Attendance (%) | Attendance rate |
+| Assignments_Avg | Avg. assignment score |
+| Parent_Education_Level | Highest parental education |
+| Family_Income_Level | Low/Medium/High |
+| … | Additional demographic & academic features |
+
+---
+
+## 📚 References  
+- Academic literature on stress–performance relationships.  
+- Research on sleep as a cognitive moderator.  
+- Course materials and statistical modeling guidelines.
+
+---
+
+## ▶️ Instructions for Running the Project
+
+### **1. Install Dependencies**
+```bash
+pip install -r requirements.txt
+```
+
+### **2. Run the Full Pipeline**
+```bash
+python main.py
+```
+
+### **3. Run Tests**
+```bash
+pytest tests/
+```
+
+---
+
+## 🧪 Tests Directory — What’s Covered  
+Each major stage has a dedicated test file:
+
+- **test_data_import.py** — Ensures dataset loads correctly and required columns exist.  
+- **test_data_cleaning.py** — Validates missing-value handling and type conversions.  
+- **test_feature_engineering.py** — Confirms creation of interaction terms and transformations.  
+- **test_modeling.py** — Checks model training, coefficients, and expected output structure.  
+- **test_analysis.py** — Ensures statistical tests return valid metrics.
+
+Successful execution confirms that each stage meets its intended assumptions.
+
+---
+
+## 🧱 Main Script (main.py)
+
+The main script contains only high-level orchestration:
+
+- Load data  
+- Clean data  
+- Engineer features  
+- Train model  
+- Run analysis  
+- Generate visualizations  
+
+All heavy logic resides in modular functions inside `src/`.
+
+---
+
+## 📝 Logging Best Practices  
+- All modules use Python’s `logging` library.  
+- No `print()` statements appear in production code.  
+- Logs include timestamps, module names, and severity levels.
+
+---
+
+## 🏷️ Naming Conventions  
+- Project name: **student-performance-cognitive-analysis**  
+- All Python files use `snake_case`.  
+- No raw numbers or strings passed directly into functions — only named variables.  
+- Functions remain short (<50 lines) and modular.
+
+---
+
+## 🧭 Kick-Off Guidelines (Completed)
+
+- Dataset fully understood.  
+- Challenges identified: missing values, biased grading, imbalanced departments.  
+- Unexpected challenges considered: multicollinearity, non-linear stress effects.  
+- Effort estimation and work plan defined.  
+- Evaluation strategy: statistical significance, effect size, visual clarity.
