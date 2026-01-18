@@ -15,7 +15,6 @@ def convert_column_types(df: pd.DataFrame) -> pd.DataFrame:
     # Attempts to convert object (string) columns into numeric or datetime types.
     
     df = df.copy()
-    
     for col in df.columns:
         
         if df[col].dtype == object:
@@ -37,18 +36,24 @@ def convert_column_types(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def detect_invalid_values(df: pd.DataFrame) -> None:
+    # Detect and log invalid values for key columns
+
     if "Stress_Level (1-10)" in df.columns:
         invalid = df[(df["Stress_Level (1-10)"] < 1) | (df["Stress_Level (1-10)"] > 10)]
         logger.info("Invalid stress values: %d", len(invalid))
+    
     if "Sleep_Hours_per_Night" in df.columns:
         invalid = df[df["Sleep_Hours_per_Night"] < 0]
         logger.info("Invalid sleep hours: %d", len(invalid))
+    
     if "Total_Score" in df.columns:
         invalid = df[(df["Total_Score"] < 0) | (df["Total_Score"] > 100)]
         logger.info("Invalid total score values: %d", len(invalid))
 
 
 def detect_outliers(df: pd.DataFrame) -> None:
+    # Detect outliers using the IQR rule (1.5 * IQR)
+
     numeric_cols = df.select_dtypes(include=[np.number]).columns
     for col in numeric_cols:
         q1, q3 = df[col].quantile([0.25, 0.75])
@@ -61,24 +66,51 @@ def detect_outliers(df: pd.DataFrame) -> None:
 
 
 def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Handle missing values with simple rules:
+    - Drop columns with >50% missing values
+    - Fill numeric columns with median
+    - Fill non-numeric columns with mode
+    """
+    
+    df = df.copy()
     for col in df.columns:
         missing_ratio = df[col].isna().mean()
-        if missing_ratio > 0.5:
+        
+        if missing_ratio > 0.5:  # If too many missing values, drop the column entirely
             df = df.drop(columns=[col])
             continue
-        if df[col].dtype in [np.float64, np.int64]:
+        
+        if df[col].dtype in [np.float64, np.int64]:  # Numeric imputation: median
             df[col] = df[col].fillna(df[col].median())
-        else:
+        
+        else:   # Categorical/string imputation: mode (most frequent)
             df[col] = df[col].fillna(df[col].mode()[0])
     return df
 
 
 def clean_full_dataset(df_raw: pd.DataFrame) -> pd.DataFrame:
+    """
+    Full data cleaning pipeline.
+
+    Stages:
+    1) Standardize missing tokens -> np.nan
+    2) Convert column types (numeric / datetime when possible)
+    3) Log invalid values and outliers (visibility, not removal)
+    4) Handle missing values (drop/median/mode)
+
+    Returns:
+    Cleaned DataFrame ready for feature engineering, EDA, and modeling.
+    """
     logger.info("Starting full dataset cleaning pipeline")
+
     df = standardize_missing_tokens(df_raw)
     df = convert_column_types(df)
+
     detect_invalid_values(df)
     detect_outliers(df)
+
     df = handle_missing_values(df)
     logger.info("Final cleaned dataset shape: %s", df.shape)
+    
     return df
