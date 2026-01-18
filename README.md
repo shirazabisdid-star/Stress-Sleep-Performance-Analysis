@@ -10,6 +10,7 @@ The core hypothesis:
 - Clean and preprocess academic, demographic, and behavioral features.  
 - Explore correlations between stress, sleep, and academic performance.  
 - Build a regression model to test whether sleep moderates the effect of stress.  
+- Use Unsupervised Learning (K-means) to identify student profiles based on lifestyle and performance.
 - Identify potential thresholds where stress begins to significantly reduce performance.
 
 ### 🧩 Assumptions  
@@ -21,6 +22,7 @@ The core hypothesis:
 1. Higher stress correlates with lower academic performance.  
 2. Sleep moderates the relationship: students with 7–8 hours of sleep show greater resilience to stress.  
 3. There may be a stress “tipping point” where performance drops sharply.
+4. Cluster Hypothesis: Distinct groups of students (e.g., "High Stress/Low Sleep") will show significantly different academic trajectories.
 
 ---
 
@@ -37,7 +39,12 @@ project_root/
 │   ├── data_cleaning.py
 │   ├── feature_engineering.py
 │   ├── modeling.py
-│   ├── analysis.py
+│   ├── analysis/
+│       ├── eda_components.py
+        ├── eda_basic.py
+        ├── eda_advanced.py
+        ├── model_analysis.py
+        └── model_diagnostics.py
 │   ├── visualization_basic.py
     └── visualization_advanced.py
 │
@@ -46,6 +53,7 @@ project_root/
 │   ├── test_data_cleaning.py
 │   ├── test_feature_engineering.py
 │   ├── test_modeling.py
+    ├── test_pca_clustering.py
 │   └── test_analysis.py
 │
 ├── main.py
@@ -79,6 +87,7 @@ project_root/
 - Pearson correlation analysis between stress, sleep, and Total_Score.  
 - Multiple linear regression with interaction term.  
 - Evaluate significance (p-values), effect sizes, and model fit.
+- Implementing K-means Clustering to segment the student population.
 
 ### **5. Analysis**
 - Identify stress thresholds where performance declines.  
@@ -89,6 +98,20 @@ project_root/
 - Correlation heatmaps.  
 - Regression plots with interaction effects.  
 - Stress vs. Total_Score curves with sleep-level overlays.
+- Cluster distributions.
+
+---
+
+### 📊 Key Analysis Visualizations
+
+#### 1. Interaction Effect: Stress, Sleep, and Performance
+This graph illustrates our core hypothesis. It shows how the relationship between stress levels and total scores changes based on the amount of sleep a student gets. 
+- **Slopes:** A steeper decline in the "Low Sleep" group compared to the "High Sleep" group indicates that sleep acts as a protective buffer against stress.
+![Interaction Effect](figures/interaction_effect.png)
+
+#### 2. Stress and Sleep Distributions
+This visualization shows the distribution of our two primary independent variables across the entire dataset. It helps identify the most common stress levels and sleep patterns among the students.
+![Stress and Sleep Distributions](figures/stress_sleep_distributions.png)
 
 ---
 
@@ -144,7 +167,8 @@ Each major stage has a dedicated test file:
 - **test_data_import.py** — Ensures dataset loads correctly and required columns exist.  
 - **test_data_cleaning.py** — Validates missing-value handling and type conversions.  
 - **test_feature_engineering.py** — Confirms creation of interaction terms and transformations.  
-- **test_modeling.py** — Checks model training, coefficients, and expected output structure.  
+- **test_modeling.py** — Checks model training, coefficients, and expected output structure.
+- **test_pca_clustering.py** — Verifies the dimensionality reduction process (PCA) and ensures consistent cluster assignment logic for student profiling.  
 - **test_analysis.py** — Ensures statistical tests return valid metrics.
 
 Successful execution confirms that each stage meets its intended assumptions.
@@ -188,4 +212,3 @@ All heavy logic resides in modular functions inside `src/`.
 - Unexpected challenges considered: multicollinearity, non-linear stress effects.  
 - Effort estimation and work plan defined.  
 - Evaluation strategy: statistical significance, effect size, visual clarity.
-
