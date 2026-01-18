@@ -16,6 +16,7 @@ def convert_column_types(df: pd.DataFrame) -> pd.DataFrame:
     
     df = df.copy()
     for col in df.columns:
+        
         if df[col].dtype == object:
             
             try:    # Try converting column to numeric (if values are like "3", "4.5", etc.)
@@ -30,6 +31,7 @@ def convert_column_types(df: pd.DataFrame) -> pd.DataFrame:
                     df[col] = pd.to_datetime(df[col], errors='coerce')
             except Exception:   # If parsing fails, keep original dtype
                 pass
+
     return df
 
 
