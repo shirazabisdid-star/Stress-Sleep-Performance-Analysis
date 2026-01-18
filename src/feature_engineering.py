@@ -1,5 +1,4 @@
 import pandas as pd
-from sklearn.decomposition import PCA
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -29,4 +28,3 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     df = add_centered_variables(df)
     logger.info("Feature engineering completed with columns: %s", df.columns)
     return df
-
