@@ -6,24 +6,33 @@ logger = get_logger(__name__)
 
 
 def standardize_missing_tokens(df: pd.DataFrame) -> pd.DataFrame:
+    # Replace common 'missing value' tokens with actual NaN values.
     missing_tokens = ["", " ", "NA", "N/A", "None", "?", "null", "Null"]
     return df.replace(missing_tokens, np.nan)
 
 
 def convert_column_types(df: pd.DataFrame) -> pd.DataFrame:
+    # Attempts to convert object (string) columns into numeric or datetime types.
+    
+    df = df.copy()
+    
     for col in df.columns:
+        
         if df[col].dtype == object:
-            try:
+            
+            try:    # Try converting column to numeric (if values are like "3", "4.5", etc.)
                 df[col] = pd.to_numeric(df[col])
                 continue
             except Exception:
                 pass
-            try:
+
+            try:     # If not numeric, try detecting a date format in a small sample.
                 sample = df[col].dropna().astype(str).head(10)
                 if sample.str.contains(r"\d{4}-\d{2}-\d{2}|\d{2}/\d{2}/\d{4}").any():
-                    df[col] = pd.to_datetime(df[col])
-            except Exception:
+                    df[col] = pd.to_datetime(df[col], errors='coerce')
+            except Exception:   # If parsing fails, keep original dtype
                 pass
+
     return df
 
 
