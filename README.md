@@ -188,3 +188,4 @@ All heavy logic resides in modular functions inside `src/`.
 - Unexpected challenges considered: multicollinearity, non-linear stress effects.  
 - Effort estimation and work plan defined.  
 - Evaluation strategy: statistical significance, effect size, visual clarity.
+
