@@ -7,26 +7,35 @@ import pandas as pd
 
 def eda_distributions(df, output_dir="figures"):
     """Basic distributions and outliers."""
+    # Create output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
+    # Set figure size
     plt.figure(figsize=(10, 4))
+    # Boxplot for stress and sleep variables
     sns.boxplot(data=df[["Stress_Level_c", "Sleep_Hours_c"]])
     plt.title("Stress & Sleep Distributions")
     plt.savefig(f"{output_dir}/eda_distributions.png")
     plt.close()
 
+
 def eda_pairplot(df, output_dir="figures"):
     """Quick look at linearity between variables."""
+    # Ensure output directory exists
     os.makedirs(output_dir, exist_ok=True)
+    # Create pairplot with regression lines
     sns.pairplot(df[["Stress_Level_c", "Sleep_Hours_c", "Total_Score"]], kind="reg")
     plt.savefig(f"{output_dir}/eda_pairplot.png")
     plt.close()
 
+
 def eda_correlation(df, output_dir="figures"):
     """Correlation heatmap."""
+    # Ensure output directory exists
     os.makedirs(output_dir, exist_ok=True)
+    # Set figure size
     plt.figure(figsize=(8, 6))
+    # Draw correlation heatmap
     sns.heatmap(df.corr(numeric_only=True), cmap="coolwarm")
     plt.title("Correlation Heatmap")
     plt.savefig(f"{output_dir}/eda_correlation.png")
     plt.close()
-
