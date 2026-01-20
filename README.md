@@ -68,24 +68,28 @@ project_root/
 - Normalize or scale numeric features where needed.
 
 ### **3. Feature Engineering**
-- Create interaction term:  
-  \[
-  \text{Stress} \times \text{Sleep}
-  \]
-- Validate distributions and detect outliers.  
+- Create interaction term:
+    Stress x Sleep
+- Validate distributions and detect outliers.
 - Construct modeling-ready dataset.
 
-### **4. Modeling**
+### **4. Exploratory Analysis (Basic & Advanced)**
+- 	Correlation analysis between stress, sleep, and performance
+- 	PCA for dimensionality reduction
+- 	K‑means clustering to identify student profiles
+- 	Cluster interpretation and validation
+
+### **5. Modeling**
 - Pearson correlation analysis between stress, sleep, and Total_Score.  
 - Multiple linear regression with interaction term.  
 - Evaluate significance (p-values), effect sizes, and model fit.
 
-### **5. Analysis**
+### **6. Analysis**
 - Identify stress thresholds where performance declines.  
 - Compare performance across sleep ranges (e.g., <6, 6–7, 7–8, >8 hours).  
 - Interpret moderation effect.
 
-### **6. Visualization**
+### **7. Visualization**
 - Correlation heatmaps.  
 - Regression plots with interaction effects.  
 - Stress vs. Total_Score curves with sleep-level overlays.
@@ -109,6 +113,21 @@ project_root/
 | Parent_Education_Level | Highest parental education |
 | Family_Income_Level | Low/Medium/High |
 | … | Additional demographic & academic features |
+
+---
+
+### 📊 Key Analysis Visualizations
+
+#### 1. Interaction Effect: Stress, Sleep, and Performance
+This graph illustrates our core hypothesis. It shows how the relationship between stress levels and total scores changes based on the amount of sleep a student gets. 
+
+- **Slopes:** A steeper decline in the "Low Sleep" group compared to the "High Sleep" group indicates that sleep acts as a protective buffer against stress.
+![Interaction Effect](figures/interaction_effect.png)
+
+#### 2. Stress and Sleep Distributions
+This visualization shows the distribution of our two primary independent variables across the entire dataset. It helps identify the most common stress levels and sleep patterns among the students.
+
+![Stress and Sleep Distributions](figures/stress_sleep_distributions.png)
 
 ---
 
