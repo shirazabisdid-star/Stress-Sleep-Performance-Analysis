@@ -14,8 +14,10 @@ def add_centered_variables(df: pd.DataFrame) -> pd.DataFrame:
     # Centers stress and sleep variables and adds their interaction term
     logger.info("Centering stress and sleep variables")
     df = df.copy()
+    # Center each variable by subtracting its mean
     df["Stress_Level_c"] = df["Stress_Level (1-10)"] - df["Stress_Level (1-10)"].mean()
     df["Sleep_Hours_c"] = (df["Sleep_Hours_per_Night"] - df["Sleep_Hours_per_Night"].mean())
+    # Create interaction term using centered variables
     df["Stress_Sleep_Interaction_c"] = (df["Stress_Level_c"] * df["Sleep_Hours_c"])
     return df
 
@@ -23,5 +25,6 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     # Main function to perform feature engineering
     df = add_interaction_term(df)
     df = add_centered_variables(df)
+    # Log final set of engineered features
     logger.info("Feature engineering completed with columns: %s", df.columns)
     return df
