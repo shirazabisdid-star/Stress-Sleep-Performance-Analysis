@@ -4,12 +4,13 @@ import matplotlib.pyplot as plt
 
 def eda_score_components(df, output_dir="figures"):
     """
-    Analyze the components that make up Total_Score.
-    Includes distributions, correlations, and pairplots.
+    Perform EDA on the components contributing to Total_Score.
+    Generates distribution plots and a correlation heatmap.
     """
-
+    # Ensure output directory exists
     os.makedirs(output_dir, exist_ok=True)
 
+    # Columns representing different score components
     score_cols = [
         "Midterm_Score",
         "Final_Score",
@@ -20,7 +21,7 @@ def eda_score_components(df, output_dir="figures"):
         "Total_Score"
     ]
 
-    # 1) Distributions of each component
+    # 1) Plot distribution of each score component
     for col in score_cols:
         plt.figure(figsize=(6, 4))
         sns.histplot(df[col], kde=True)
@@ -35,9 +36,4 @@ def eda_score_components(df, output_dir="figures"):
     plt.title("Correlation Between Score Components")
     plt.tight_layout()
     plt.savefig(f"{output_dir}/score_components_corr.png")
-    plt.close()
-
-    # 3) Pairplot to visualize linearity between components
-    sns.pairplot(df[score_cols], kind="reg")
-    plt.savefig(f"{output_dir}/score_components_pairplot.png")
     plt.close()
