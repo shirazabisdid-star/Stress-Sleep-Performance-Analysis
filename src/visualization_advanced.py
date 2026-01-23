@@ -40,18 +40,24 @@ def plot_interaction_effect(df, model, output_dir="figures"):
     # Prepare ranges for plotting 
     stress_range, sleep_levels = prepare_interaction_ranges(df)
 
+    # Create the figure before plotting
     plt.figure(figsize=(8, 6))
 
     for sleep_level in sleep_levels:
+        # Predict Total Score for the full stress range at a given sleep level
         y_pred = predict_interaction(model, stress_range, sleep_level)
+        # Label for the legend showing the sleep value used
         label = f"Sleep (centered) = {sleep_level:.2f}"
+        # Plot predicted line for this sleep level
         plt.plot(stress_range, y_pred, label=label)
 
+    # Add axis labels and title
     plt.xlabel("Stress Level (centered)")
     plt.ylabel("Predicted Total Score")
     plt.title("Interaction: Stress × Sleep")
     plt.legend()
 
+    # Save the plot to file
     path = f"{output_dir}/interaction_effect.png"
     plt.tight_layout()
     plt.savefig(path)
