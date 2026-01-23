@@ -40,30 +40,17 @@ def plot_interaction_effect(df, model, output_dir="figures"):
     # Prepare ranges for plotting 
     stress_range, sleep_levels = prepare_interaction_ranges(df)
 
-    # Set up plot aesthetics
-    sns.set_theme(style="whitegrid", context="talk", font_scale=1.1)
-    plt.rcParams["figure.dpi"] = 150
-    palette = ["#1f77b4", "#ff7f0e", "#2ca02c"]
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(8, 6))
 
-    # Plot predictions for each sleep level
-    for i, sleep_level in enumerate(sleep_levels):
+    for sleep_level in sleep_levels:
         y_pred = predict_interaction(model, stress_range, sleep_level)
         label = f"Sleep (centered) = {sleep_level:.2f}"
-        plt.plot(
-            stress_range,
-            y_pred,
-            label=label,
-            color=palette[i],
-            linewidth=3
-        )
+        plt.plot(stress_range, y_pred, label=label)
 
-    # Finalize plot details
     plt.xlabel("Stress Level (centered)")
-    plt.ylabel("Predicted Total Score", rotation=0, labelpad=40)
+    plt.ylabel("Predicted Total Score")
     plt.title("Interaction: Stress × Sleep")
-    plt.legend(title="Sleep Level", frameon=True, facecolor="white", framealpha=1)
-    plt.grid(alpha=0.3)
+    plt.legend()
 
     path = f"{output_dir}/interaction_effect.png"
     plt.tight_layout()
