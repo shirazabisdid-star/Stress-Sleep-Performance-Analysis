@@ -1,6 +1,5 @@
 import pandas as pd
 import statsmodels.api as sm
-from sklearn.cluster import KMeans
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
