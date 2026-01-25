@@ -32,4 +32,3 @@ def summarize_model(model) -> str:
     # Return a text summary of the fitted regression model
     logger.info("Generating model summary")
     return model.summary().as_text()
-

@@ -16,7 +16,7 @@ def plot_distributions(df: pd.DataFrame, output_dir: str = "figures"):
 
     # Left plot: distribution of stress levels (1-10)
     plt.subplot(1, 2, 1)
-    sns.histplot(df["Stress_Level (1-10)"], kde=True)
+    sns.histplot(df["Stress_Level (1-10)"], bins=range(1, 12), discrete=True, kde=True)
     plt.title("Stress Level Distribution")
 
     # Right plot: distribution of sleep hours per night
