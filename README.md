@@ -111,7 +111,7 @@ project_root/
 #### 1. Interaction Effect: Stress, Sleep, and Performance
 This graph illustrates our core hypothesis. It shows how the relationship between stress levels and total scores changes based on the amount of sleep a student gets. 
 - **Slopes:** A steeper decline in the "Low Sleep" group compared to the "High Sleep" group indicates that sleep acts as a protective buffer against stress.
-![Interaction Effect](figures/interaction_effect.png)
+![Interaction Effect](figures/interaction_effect_v2.png)
 
 #### 2. Stress and Sleep Distributions
 This visualization shows the distribution of our two primary independent variables across the entire dataset. It helps identify the most common stress levels and sleep patterns among the students.
