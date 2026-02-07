@@ -155,8 +155,12 @@ This visualization shows the distribution of our two primary independent variabl
 ---
 
 ## 📚 References  
-- Academic literature on stress–performance relationships.  
-- Research on sleep as a cognitive moderator.  
+McEwen, B. S. (1998). Stress, adaptation, and disease: Allostasis and allostatic load. Annals of the New York Academy of Sciences, 840(1), 33–44. https://doi.org/10.1111/j.1749-6632.1998.tb09546.x
+Lupien, S. J., McEwen, B. S., Gunnar, M. R., & Heim, C. (2009). Effects of stress throughout the lifespan on the brain, behaviour and cognition. Nature Reviews Neuroscience, 10(6), 434–445. https://doi.org/10.1038/nrn2639
+Curcio, G., Ferrara, M., & De Gennaro, L. (2006). Sleep loss, learning capacity and academic performance. Sleep Medicine Reviews, 10(5), 323–337. https://doi.org/10.1016/j.smrv.2005.11.001
+Walker, M. P. (2009). The role of sleep in cognition and emotion. Annals of the New York Academy of Sciences, 1156(1), 168–197. https://doi.org/10.1111/j.1749-6632.2009.04416.x
+Aiken, L. S., & West, S. G. (1991). Multiple regression: Testing and interpreting interactions. Sage Publications.
+
 - Course materials and statistical modeling guidelines.
 
 ---
