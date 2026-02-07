@@ -139,20 +139,6 @@ This visualization shows the distribution of our two primary independent variabl
 
 ---
 
-### 📊 Key Analysis Visualizations
-
-#### 1. Interaction Effect: Stress, Sleep, and Performance
-This graph illustrates our core hypothesis. It shows how the relationship between stress levels and total scores changes based on the amount of sleep a student gets. 
-
-- **Slopes:** A steeper decline in the "Low Sleep" group compared to the "High Sleep" group indicates that sleep acts as a protective buffer against stress.
-![Interaction Effect](figures/interaction_effect.png)
-
-#### 2. Stress and Sleep Distributions
-This visualization shows the distribution of our two primary independent variables across the entire dataset. It helps identify the most common stress levels and sleep patterns among the students.
-
-![Stress and Sleep Distributions](figures/stress_sleep_distributions.png)
-
----
 
 ## 📚 References  
 McEwen, B. S. (1998). Stress, adaptation, and disease: Allostasis and allostatic load. Annals of the New York Academy of Sciences, 840(1), 33–44. https://doi.org/10.1111/j.1749-6632.1998.tb09546.x
